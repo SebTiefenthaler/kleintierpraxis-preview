@@ -79,6 +79,18 @@ h3+.liste{margin-top:6px}
 .chefin b{display:block;font-size:24px;font-weight:500;letter-spacing:-.02em;line-height:1.2}
 .chefin span{display:block;color:var(--soft);margin-top:4px}
 address{font-style:normal;font-size:clamp(26px,2.6vw,38px);line-height:1.2;letter-spacing:-.02em}
+.wahl{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.wahl button{font:inherit;font-weight:600;font-size:16px;height:44px;padding:0 18px;border-radius:999px;border:0;background:#f1efeb;color:var(--ink);cursor:pointer;transition:background .2s,color .2s}
+.wahl button[aria-pressed=true]{background:var(--ink);color:#fff}
+.feld{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:18px;font-weight:500}
+.feld input,.feld select{font:inherit;font-weight:500;height:46px;padding:0 14px;border-radius:12px;border:1.5px solid rgba(27,26,24,.3);background:#fff;color:var(--ink);min-width:0}
+.feld input:focus,.feld select:focus,.wahl button:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+.schritte li{padding:14px 0;font-size:19px}
+.schritte b{display:block;font-size:15px;font-weight:500;color:var(--soft)}
+.impf .feld{display:grid;grid-template-columns:11.5em minmax(0,16em);gap:12px}
+.erg{margin-top:18px;font-size:20px;font-weight:500;min-height:1.5em}
+.impf .btn{margin-top:14px;border:0;cursor:pointer;font:inherit;font-weight:600}
+.hin a,.tl{font-weight:600;color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--orange)}
 .karte{display:block;position:relative;margin-top:26px;border-radius:22px;overflow:hidden;aspect-ratio:16/10;background:#e8e6e1}
 .karte img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
 .karte:hover img{transform:scale(1.03)}
@@ -91,9 +103,14 @@ address{font-style:normal;font-size:clamp(26px,2.6vw,38px);line-height:1.2;lette
 .fuss{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-size:15px;color:var(--soft);display:flex;flex-wrap:wrap;gap:8px 22px}
 .fuss a{text-decoration:underline;text-underline-offset:3px}
 
+@media (max-width:1180px){header nav{gap:18px;font-size:15px}}
+@media (max-width:1040px){header nav{display:none}.call{margin-left:auto}}
 @media (max-width:860px){
   header{padding:12px 20px}
   header nav{display:none}
+  .impf .feld{grid-template-columns:1fr;gap:6px}
+  .feld input,.feld select{width:100%}
+  #opzeitfeld input{width:auto}
   .wm{font-size:15px;overflow:hidden;text-overflow:ellipsis}
   .call{height:40px;padding:0 14px;font-size:15px;margin-left:auto}
   .scrim{background:linear-gradient(to top,rgba(14,12,10,.92) 0,rgba(14,12,10,.74) 42%,rgba(14,12,10,.12) 74%,rgba(14,12,10,.35) 100%)}
@@ -115,7 +132,7 @@ address{font-style:normal;font-size:clamp(26px,2.6vw,38px);line-height:1.2;lette
 
 <header>
   <a class="wm" href="#"><img src="bilder/logo.png" alt="" width="30" height="30">Kleintierpraxis Dr. Tiefenthaler</a>
-  <nav><a href="#zeiten">Sprechzeiten</a><a href="#leistungen">Leistungen</a><a href="#praxis">Praxis</a><a href="#notfall">Notfall</a><a href="#anfahrt">Anfahrt</a></nav>
+  <nav><a href="#zeiten">Sprechzeiten</a><a href="#leistungen">Leistungen</a><a href="#op">OP-Hinweise</a><a href="#impfung">Impfung</a><a href="#team">Team</a><a href="#notfall">Notfall</a><a href="#anfahrt">Anfahrt</a></nav>
   <a class="call" href="tel:+4980358739188"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>08035 8739188</a>
 </header>
 
@@ -197,17 +214,46 @@ address{font-style:normal;font-size:clamp(26px,2.6vw,38px);line-height:1.2;lette
   <ul class="liste">
     <li>Zahnsteinentfernung mit Ultraschall</li><li>Zahnextraktion</li><li>Zahnbehandlung Nager</li>
   </ul>
-  <h3>Vor und nach der Operation</h3>
-  <ul class="liste eins">
+  <p class="fein hin"><a href="#op">Steht eine Operation an? Hier stehen die Hinweise für davor und danach.</a></p>
+</div>
+</div></section>
+
+<section class="ch" id="op"><div class="box">
+  <div class="links"><p class="kick">OP-Hinweise</p>
+  <h2>Vor und nach der Operation</h2></div>
+  <div class="inh">
+  <p class="text">Wählen Sie Ihr Tier und die Uhrzeit des Termins. Dann sehen Sie, was davor und danach gilt.</p>
+  <div class="wahl" role="group" aria-label="Tierart" id="optier">
+    <button type="button" aria-pressed="true" data-art="hk">Hund</button><button type="button" aria-pressed="false" data-art="hk">Katze</button><button type="button" aria-pressed="false" data-art="km">Kaninchen</button><button type="button" aria-pressed="false" data-art="km">Meerschweinchen</button>
+  </div>
+  <label class="feld" id="opzeitfeld">OP-Termin um <input type="time" id="opzeit" value="08:00" step="900"> Uhr</label>
+  <ul class="liste eins schritte" id="opliste" aria-live="polite">
     <li><b>Hund und Katze, vorher:</b> zwölf Stunden kein Futter, die letzten zwei Stunden auch nichts trinken.</li>
     <li><b>Hund und Katze, danach:</b> acht Stunden nicht füttern.</li>
     <li><b>Kaninchen und Meerschweinchen:</b> nicht nüchtern lassen. Sie fressen vorher ganz normal und danach, sobald sie wollen. Bitte gut warm halten.</li>
   </ul>
-</div>
+  <p class="fein">Wenn Sie unsicher sind, rufen Sie uns an: <a class="tl" href="tel:+4980358739188">08035 8739188</a></p>
+  </div>
 </div></section>
 
-<section class="ch" id="praxis"><div class="box">
-  <div class="links"><p class="kick">Die Praxis</p>
+<section class="ch" id="impfung"><div class="box">
+  <div class="links"><p class="kick">Impf-Erinnerung</p>
+  <h2>Die nächste Impfung nicht vergessen</h2></div>
+  <div class="inh">
+  <p class="text">Tragen Sie ein, wann Ihr Tier zuletzt geimpft wurde. Sie bekommen einen Eintrag für Ihren Kalender, der Sie zwei Wochen vorher erinnert. Wann die nächste Impfung fällig ist, steht im Impfpass.</p>
+  <form class="impf" id="impf">
+    <label class="feld">Name des Tieres <input type="text" id="iname" autocomplete="off" placeholder="zum Beispiel Bello"></label>
+    <label class="feld">Letzte Impfung am <input type="date" id="idatum" required></label>
+    <label class="feld">Nächste Impfung nach <select id="iabstand"><option value="12" selected>einem Jahr</option><option value="24">zwei Jahren</option><option value="36">drei Jahren</option><option value="6">sechs Monaten</option><option value="1">einem Monat</option></select></label>
+    <p class="erg" id="ierg" aria-live="polite"></p>
+    <button class="btn" type="submit">In den Kalender eintragen</button>
+  </form>
+  <p class="fein">Die Angaben bleiben auf Ihrem Gerät. Es wird nichts an uns oder an andere gesendet.</p>
+  </div>
+</div></section>
+
+<section class="ch" id="team"><div class="box">
+  <div class="links"><p class="kick">Team</p>
   <h2>Ihre Hausärztin fürs Tier</h2></div>
   <div class="inh">
   <div class="chefin">
@@ -234,8 +280,8 @@ address{font-style:normal;font-size:clamp(26px,2.6vw,38px);line-height:1.2;lette
 </div></section>
 
 <section class="ch" id="anfahrt"><div class="box">
-  <div class="links"><p class="kick">Anfahrt</p>
-  <h2>Bis bald.</h2></div>
+  <div class="links"><p class="kick">Kontakt</p>
+  <h2>Anfahrt</h2></div>
   <div class="inh">
   <address>Prinzregentenstraße 1<br>83064 Raubling</address>
   <p class="fein">Die Zufahrt ist zurzeit nur über die Bayernstraße möglich. Parkplätze sind hinter dem Haus.</p>
@@ -270,6 +316,34 @@ address{font-style:normal;font-size:clamp(26px,2.6vw,38px);line-height:1.2;lette
   else if(kommt){k='Heute wieder ab '+kommt[0]+' Uhr'}
   else{k='Gerade geschlossen, '+(i===1?'morgen':TAG[nx])+' ab '+Z[nx][0][0]+' Uhr'}
   document.getElementById('status').textContent=k;
+
+  /* OP-Hinweise: Tierart und Uhrzeit */
+  const ot=document.getElementById('optier'),oz=document.getElementById('opzeit'),ol=document.getElementById('opliste'),ozf=document.getElementById('opzeitfeld');
+  const uhr=m=>{m=((m%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')+' Uhr'};
+  function op(){
+    const b=ot.querySelector('[aria-pressed=true]'),art=b.dataset.art,name=b.textContent;
+    const li=(a,t)=>'<li><b>'+a+'</b>'+t+'</li>';
+    if(art==='km'){ozf.hidden=true;
+      ol.innerHTML=li('Vorher','Nicht nüchtern lassen. Ihr '+name+' frisst ganz normal weiter.')+li('Danach','Es darf fressen, sobald es will.')+li('Wichtig','Bitte gut warm halten.');return}
+    ozf.hidden=false;
+    const [hh,mm]=(oz.value||'08:00').split(':').map(Number),t=hh*60+mm;
+    ol.innerHTML=li('Letztes Futter',(t-720<0?'Am Vorabend bis ':'Bis ')+uhr(t-720)+'. Danach nichts mehr füttern.')+li('Trinken',(t-120<0?'Am Vorabend bis ':'Bis ')+uhr(t-120)+'. Danach auch nichts mehr trinken.')+li('Danach','Acht Stunden nach der Operation nicht füttern.');
+  }
+  ot.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;ot.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));op()});
+  oz.addEventListener('input',op);op();
+
+  /* Impf-Erinnerung: Kalendereintrag zum Herunterladen */
+  const f=document.getElementById('impf'),idt=document.getElementById('idatum'),iab=document.getElementById('iabstand'),ina=document.getElementById('iname'),ier=document.getElementById('ierg');
+  const faellig=()=>{if(!idt.value)return null;const [y,m,t]=idt.value.split('-').map(Number);const x=new Date(y,m-1+Number(iab.value),t);return x};
+  const zeig=()=>{const x=faellig();ier.textContent=x?'Nächste Impfung fällig am '+x.toLocaleDateString('de-DE',{day:'numeric',month:'long',year:'numeric'})+'.':''};
+  idt.addEventListener('input',zeig);iab.addEventListener('input',zeig);
+  f.addEventListener('submit',e=>{e.preventDefault();const x=faellig();if(!x)return;
+    const p=v=>String(v).padStart(2,'0'),tag=q=>q.getFullYear()+p(q.getMonth()+1)+p(q.getDate()),y=new Date(x);y.setDate(y.getDate()+1);
+    const wer=(ina.value||'').trim().replace(/[\\,;]/g,' '),titel='Impfung'+(wer?' für '+wer:'')+': Termin vereinbaren';
+    const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Kleintierpraxis Dr. Tiefenthaler//Impferinnerung//DE','BEGIN:VEVENT','UID:impfung-'+tag(x)+'-'+Math.random().toString(36).slice(2)+'@kleintierpraxis-raubling.de','DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z','DTSTART;VALUE=DATE:'+tag(x),'DTEND;VALUE=DATE:'+tag(y),'SUMMARY:'+titel,'DESCRIPTION:Kleintierpraxis Dr. Tiefenthaler\\, Telefon 08035 8739188. Bitte Impfpass mitbringen.','LOCATION:Prinzregentenstraße 1\\, 83064 Raubling','BEGIN:VALARM','TRIGGER:-P14D','ACTION:DISPLAY','DESCRIPTION:'+titel,'END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar;charset=utf-8'}));a.download='impfung'+(wer?'-'+wer.toLowerCase().replace(/[^a-z0-9äöüß]+/g,'-'):'')+'.ics';document.body.appendChild(a);a.click();a.remove();
+    ier.textContent='Kalendereintrag erstellt. Öffnen Sie die Datei, um ihn zu speichern.';
+  });
 })();
 </script>
 </body>
