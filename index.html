@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Entwurf H · Rundgang · Kleintierpraxis Dr. Tiefenthaler, Raubling</title>
+<meta name="robots" content="noindex">
+<style>
+@font-face{font-family:"Instrument Sans";src:url(fonts/instrument-sans.woff2) format("woff2");font-weight:400 700;font-display:swap}
+:root{--ink:#1b1a18;--soft:#625e58;--line:rgba(27,26,24,.14);--orange:#e5632b;--pad:clamp(20px,6vw,96px);--col:min(560px,42vw)}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:#fff;color:var(--ink);font:400 18px/1.55 "Instrument Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+ul{list-style:none;padding:0}
+h1,h2{font-weight:500;letter-spacing:-.03em;line-height:1.02}
+
+/* Rundgang leise im Hintergrund */
+.stage{opacity:0;position:fixed;inset:0;z-index:0;overflow:hidden;background:#fff;pointer-events:none}
+#cv{position:absolute;right:0;top:0;width:62vw;height:100%;object-fit:cover;opacity:.5;filter:saturate(.85);-webkit-mask-image:linear-gradient(to right,transparent 0,rgba(0,0,0,.55) 38%,#000 70%);mask-image:linear-gradient(to right,transparent 0,rgba(0,0,0,.55) 38%,#000 70%)}
+.ort{position:absolute;right:var(--pad);bottom:26px;font-size:14px;font-weight:500;color:var(--ink);background:rgba(255,255,255,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 12px;border-radius:999px}
+.bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:transparent}
+.bar i{display:block;height:100%;width:0;background:var(--orange)}
+
+header{position:fixed;left:0;right:0;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:18px var(--pad) 26px;background:linear-gradient(to bottom,rgba(255,255,255,.96) 0,rgba(255,255,255,.8) 55%,rgba(255,255,255,0) 100%)}
+.wm{font-weight:600;font-size:17px;letter-spacing:-.01em;opacity:0;transition:opacity .4s}
+.scrolled .wm{opacity:1}
+.call{white-space:nowrap;margin-left:auto;display:inline-flex;align-items:center;gap:9px;height:42px;padding:0 18px;border-radius:12px;background:var(--ink);color:#fff;font-weight:600;font-size:16px}
+.call svg{width:17px;height:17px}
+
+main{position:relative;z-index:2}
+.ch{min-height:100svh;display:flex;align-items:center;padding:96px var(--pad)}
+.ch+.ch{margin-top:14svh}
+.box{width:var(--col)}
+.kick{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:500;color:var(--soft);margin-bottom:18px}
+.kick::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--orange)}
+h1{font-size:clamp(46px,6vw,92px)}
+h2{font-size:clamp(34px,3.8vw,56px)}
+.lead{font-size:clamp(19px,1.6vw,23px);line-height:1.45;color:var(--soft);margin-top:22px;max-width:24em}
+.now{display:inline-flex;align-items:center;gap:10px;margin-top:28px;font-size:16px;font-weight:500}
+.now i{width:9px;height:9px;border-radius:50%;background:#b3aea7}
+.now.auf i{background:#2fae6a}
+.go{display:flex;align-items:center;gap:12px;margin-top:clamp(40px,8vh,88px);font-size:15px;color:var(--soft)}
+.go svg{width:18px;height:18px;animation:nick 1.8s ease-in-out infinite}
+@keyframes nick{50%{transform:translateY(5px)}}
+
+.kopf{justify-content:space-between;gap:clamp(24px,5vw,80px)}
+.logo{display:block;width:clamp(96px,11vw,156px);height:auto;margin:0 0 30px -4px}
+.tiere{position:relative;flex:none;width:min(38vw,500px);aspect-ratio:4/5;border-radius:30px;overflow:hidden;background:#eee}
+.tiere img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity 1.2s ease,transform 5s ease-out}
+.tiere img.an{opacity:1;transform:none}
+.bsp{position:absolute;left:14px;bottom:14px;font-size:12px;background:rgba(255,255,255,.85);padding:3px 9px;border-radius:999px;color:var(--soft)}
+.wm{display:flex;align-items:center;gap:10px}
+.wm img{width:30px;height:30px}
+.zeiten{margin-top:28px;border-top:1px solid var(--line)}
+.zeiten li{display:grid;grid-template-columns:7.2em 1fr 1fr;gap:8px;padding:13px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.zeiten b{font-weight:500}
+.zeiten em{font-style:normal;color:var(--soft)}
+.zeiten .heute b::after{content:"heute";font-size:12px;font-weight:600;background:var(--orange);color:#fff;border-radius:999px;padding:2px 8px;margin-left:8px;vertical-align:2px}
+.fein{font-size:16px;color:var(--soft);margin-top:18px;max-width:30em}
+
+.liste{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:0 28px}
+.liste.eins{grid-template-columns:1fr}
+.liste li{padding:10px 0;border-bottom:1px solid var(--line);line-height:1.35;font-size:17px}
+h3{font-size:16px;font-weight:500;color:var(--soft);margin-top:30px}
+h3+.liste{margin-top:6px}
+
+.chefin{display:grid;grid-template-columns:minmax(0,230px) 1fr;gap:28px;align-items:end;margin-top:30px}
+.chefin img{display:block;width:100%;height:auto;aspect-ratio:1218/1291;object-fit:cover;border-radius:22px}
+.chefin b{display:block;font-size:22px;font-weight:500;letter-spacing:-.02em;line-height:1.2}
+.chefin span{display:block;color:var(--soft);margin-top:4px}
+.team{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.ph{border:1.5px dashed rgba(27,26,24,.38);border-radius:16px;padding:14px;font-size:14px;line-height:1.35;color:var(--soft);background:rgba(255,255,255,.6)}
+.ph b{display:block;font-size:12px;font-weight:600;color:var(--orange);margin-bottom:4px}
+.btn{display:inline-flex;align-items:center;height:48px;padding:0 22px;border-radius:14px;background:var(--ink);color:#fff;font-weight:600;margin-top:26px}
+.btn.line{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px rgba(27,26,24,.5);margin-left:8px}
+address{font-style:normal;font-size:clamp(24px,2.4vw,34px);line-height:1.2;letter-spacing:-.02em;margin-top:22px}
+.fuss{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-size:15px;color:var(--soft);display:flex;flex-wrap:wrap;gap:8px 22px}
+.fuss a{text-decoration:underline;text-underline-offset:3px}
+
+@media (max-width:860px){
+  :root{--col:100%}
+  #cv{width:100%;opacity:.2;-webkit-mask-image:linear-gradient(to bottom,#000 0,#000 60%,rgba(0,0,0,.5) 100%);mask-image:linear-gradient(to bottom,#000 0,#000 60%,rgba(0,0,0,.5) 100%)}
+  .ort{right:20px;bottom:calc(18px + env(safe-area-inset-bottom))}
+  header{padding:14px 20px 22px}
+  .wm{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-right:12px}
+  .call{height:40px;padding:0 14px;font-size:15px}
+  .ch{padding:84px 20px;min-height:0}
+  .ch:first-child{min-height:100svh}
+  .kopf{flex-direction:column;align-items:stretch;gap:34px;padding-top:92px}
+  .tiere{width:100%;aspect-ratio:4/3.4;border-radius:24px}
+  .logo{margin-bottom:22px}
+  .go{margin-top:28px}
+  .ch+.ch{margin-top:22svh}
+  h1{font-size:44px}
+  .liste{grid-template-columns:1fr}
+  .zeiten li{grid-template-columns:6.2em 1fr 1fr;font-size:16px}
+  .chefin{grid-template-columns:minmax(0,150px) 1fr;gap:18px}
+  .btn.line{margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){.go svg{animation:none}}
+</style>
+</head>
+<body>
+
+<div class="stage" aria-hidden="true">
+  <canvas id="cv" width="421" height="750"></canvas>
+  <span class="ort" id="ort">Eingang</span>
+  <div class="bar"><i id="bar"></i></div>
+</div>
+
+<header>
+  <a class="wm" href="#"><img src="bilder/logo.png" alt="" width="30" height="30">Kleintierpraxis Dr. Tiefenthaler</a>
+  <a class="call" href="tel:+4980358739188"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>08035 8739188</a>
+</header>
+
+<main>
+<section class="ch kopf" data-t="0.4" data-ort="Eingang">
+  <div class="box">
+    <img class="logo" src="bilder/logo.png" alt="Logo der Kleintierpraxis: Hund, Katze, Kaninchen und Äskulapstab" width="570" height="570">
+    <p class="kick">Tierarztpraxis in Raubling</p>
+    <h1>Kleintierpraxis Dr. Tiefenthaler</h1>
+    <p class="lead">Für Hund, Katze, Kaninchen und Nager. Bitte vereinbaren Sie vorab telefonisch einen Termin.</p>
+    <p class="now" id="now"><i></i><span id="status">Sprechstunde Montag bis Freitag</span></p>
+    <p class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M6 13l6 6 6-6"/></svg>Scrollen und durch die Praxis gehen</p>
+  </div>
+  <div class="tiere" id="tiere">
+    <img class="an" src="bilder/katze-decke.jpg" alt="Kätzchen schaut unter einer Decke hervor" style="object-position:53% 60%">
+    <img src="bilder/hund-liegt.jpg" alt="Hund liegt auf dem Teppich und schaut in die Kamera" style="object-position:50% 40%" loading="lazy">
+    <img src="bilder/kaninchen-nah.jpg" alt="Braunes Kaninchen, Nahaufnahme" loading="lazy">
+    <img src="bilder/hero-berner.jpg" alt="Berner Sennenhund blickt zur Seite" style="object-position:68% 40%" loading="lazy">
+    <img src="bilder/katze-dunkel.jpg" alt="Getigerte Katze blickt nach oben" style="object-position:70% 40%" loading="lazy">
+    <span class="bsp">Beispielbilder</span>
+  </div>
+</section>
+
+<section class="ch" id="zeiten" data-t="6.6" data-ort="Wartezimmer"><div class="box">
+  <p class="kick">Wartezimmer</p>
+  <h2>Herzlich willkommen.</h2>
+  <ul class="zeiten">
+    <li data-day="1"><b>Montag</b><span>8–11 Uhr</span><span>15–18 Uhr</span></li>
+    <li data-day="2"><b>Dienstag</b><span>8–11 Uhr</span><span>15–17 Uhr</span></li>
+    <li data-day="3"><b>Mittwoch</b><em>9–13 Uhr<br>OP-Termine</em><span></span></li>
+    <li data-day="4"><b>Donnerstag</b><em>9–13 Uhr<br>OP-Termine</em><span>17–19 Uhr</span></li>
+    <li data-day="5"><b>Freitag</b><span>9–13 Uhr</span><span></span></li>
+  </ul>
+  <p class="fein">Termine nach telefonischer Vereinbarung, auch für Beratungen, Futter- und Medikamentenabholung. Mittwoch und Donnerstag vormittags wird operiert, dann ist keine offene Sprechstunde.</p>
+</div></section>
+
+<section class="ch" id="leistungen" data-t="15" data-ort="Behandlungsraum"><div class="box">
+  <p class="kick">Behandlungsraum</p>
+  <h2>Vorsorge und Behandlung</h2>
+  <ul class="liste">
+    <li>Impfungen</li><li>Parasitenbehandlung</li>
+    <li>Kennzeichnung (Mikrochip, Tätowierung)</li><li>Heimtierausweis</li>
+    <li>Fütterungsberatung</li><li>Infektionskrankheiten</li>
+    <li>Krankheiten des Ohres</li><li>Krankheiten des Auges</li>
+    <li>innere Krankheiten</li><li>Krankheiten der Harnorgane</li>
+  </ul>
+</div></section>
+
+<section class="ch" data-t="20.6" data-ort="Labor"><div class="box">
+  <p class="kick">Labor</p>
+  <h2>Labor, Röntgen, Homöopathie</h2>
+  <ul class="liste eins">
+    <li>Labor in der Praxis</li>
+    <li>Röntgen</li>
+    <li>Homöopathische Behandlung</li>
+  </ul>
+</div></section>
+
+<section class="ch" data-t="23.4" data-ort="OP"><div class="box">
+  <p class="kick">Operationen</p>
+  <h2>Operationen und Zähne</h2>
+  <h3>Weichteilchirurgie</h3>
+  <ul class="liste">
+    <li>Kastration/Sterilisation (Hund, Katze, Kaninchen)</li><li>Wundversorgung/Wundnaht</li>
+    <li>Tumorentfernung</li><li>Amputation</li><li>Bulbusextirpation</li>
+  </ul>
+  <h3>Zahnbehandlungen</h3>
+  <ul class="liste">
+    <li>Zahnsteinentfernung mit Ultraschall</li><li>Zahnextraktion</li><li>Zahnbehandlung Nager</li>
+  </ul>
+  <p class="fein">OP-Termine sind Mittwoch und Donnerstag am Vormittag.</p>
+</div></section>
+
+<section class="ch" id="praxis" data-t="34" data-ort="Praxis"><div class="box">
+  <p class="kick">Die Praxis</p>
+  <h2>Dr. Irmgard Tiefenthaler und ihr Team</h2>
+  <div class="chefin">
+    <img src="bilder/dr-tiefenthaler.jpg" alt="Dr. Irmgard Tiefenthaler" width="1100" height="1166">
+    <p><b>Dr. Irmgard Tiefenthaler</b><span>Tierärztin</span></p>
+  </div>
+  <div class="team">
+    <div class="ph"><b>Platzhalter</b>Foto und Name Helferin 1</div>
+    <div class="ph"><b>Platzhalter</b>Foto und Name Helferin 2</div>
+  </div>
+  <p class="fein">Hausbesuche sind möglich. Bitte rufen Sie dafür an.</p>
+</div></section>
+
+<section class="ch" id="notfall" data-t="36.8" data-ort="Empfang"><div class="box">
+  <p class="kick">Notfall</p>
+  <h2>Außerhalb der Sprechzeiten</h2>
+  <div class="ph" style="margin-top:24px"><b>Platzhalter</b>Hier steht, wen man im Notfall anruft. Das muss die Praxis noch sagen.</div>
+</div></section>
+
+<section class="ch" id="anfahrt" data-t="43.9" data-ort="Ausgang"><div class="box">
+  <p class="kick">Anfahrt</p>
+  <h2>Bis bald.</h2>
+  <address>Prinzregentenstraße 1<br>83064 Raubling</address>
+  <p class="fein">Parkplätze hinter dem Haus sind vorhanden.</p>
+  <p><a class="btn" href="tel:+4980358739188">08035 8739188</a><a class="btn line" href="https://www.openstreetmap.org/?mlat=47.79142&mlon=12.11167#map=18/47.79142/12.11167">Karte öffnen</a></p>
+  <p class="fuss"><span>Fax 08035 8739189</span><a href="mailto:tierarztpraxis-tiefenthaler@gmx.de">tierarztpraxis-tiefenthaler@gmx.de</a><a href="#">Impressum</a><a href="#">Datenschutz</a></p>
+</div></section>
+</main>
+
+<script>
+(function(){
+  /* Rundgang: Bildfolge, vom Scrollen gesteuert */
+  const N=263,DUR=44.29,cv=document.getElementById('cv'),cx=cv.getContext('2d');
+  const bar=document.getElementById('bar'),ort=document.getElementById('ort'),stage=document.querySelector('.stage');
+  const imgs=new Array(N),ok=new Uint8Array(N);
+  const src=i=>'frames/f'+String(i+1).padStart(4,'0')+'.jpg';
+  let dirty=true;
+  function load(i){if(imgs[i])return;const im=new Image();im.decoding='async';im.onload=()=>{ok[i]=1;dirty=true};im.src=src(i);imgs[i]=im}
+  /* erst grob, dann immer feiner laden, damit die Fahrt sofort geht */
+  const order=[];for(const s of[16,8,4,2,1])for(let i=0;i<N;i+=s)if(!order.includes(i))order.push(i);
+  let q=0;function pump(){for(let k=0;k<6&&q<order.length;k++)load(order[q++]);if(q<order.length)setTimeout(pump,60)}
+  load(0);pump();
+  const near=(i,dir)=>{for(let d=0;d<N;d++){const j=i+d*dir;if(j<0||j>=N)break;if(ok[j])return j}return -1};
+
+  const chs=[...document.querySelectorAll('.ch')];let pts=[];
+  function measure(){
+    const max=document.documentElement.scrollHeight-innerHeight;
+    pts=chs.map(c=>{const r=c.getBoundingClientRect();return{y:Math.max(0,Math.min(max,r.top+scrollY+r.height/2-innerHeight/2)),t:+c.dataset.t,ort:c.dataset.ort}});
+    pts[0].y=0;pts[pts.length-1].y=max;
+  }
+  function target(){
+    const y=scrollY;let a=pts[0],b=pts[pts.length-1];
+    for(let i=0;i<pts.length-1;i++){if(y>=pts[i].y&&y<=pts[i+1].y){a=pts[i];b=pts[i+1];break}}
+    const f=b.y>a.y?Math.min(1,Math.max(0,(y-a.y)/(b.y-a.y))):0;
+    ort.textContent=(f<.5?a:b).ort;
+    return a.t+(b.t-a.t)*f;
+  }
+  const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let cur=0.4,want=0.4,last=-1;
+  function draw(){
+    let p=Math.max(0,Math.min(N-1,cur/DUR*(N-1)));if(cur===want)p=Math.round(p);const i0=Math.floor(p),fr=p-i0;
+    const a=near(i0,-1)>=0?near(i0,-1):near(i0,1),b=near(Math.min(N-1,i0+1),1);
+    if(a<0)return;
+    cx.globalAlpha=1;cx.drawImage(imgs[a],0,0,cv.width,cv.height);
+    if(b>=0&&b!==a&&fr>0){cx.globalAlpha=(b-a===1)?fr:Math.min(1,(p-a)/(b-a));cx.drawImage(imgs[b],0,0,cv.width,cv.height);cx.globalAlpha=1}
+    bar.style.width=(cur/DUR*100)+'%';
+  }
+  function tick(){
+    want=target();
+    cur=calm?want:cur+(want-cur)*.12;
+    if(Math.abs(want-cur)<.004)cur=want;
+    if(dirty||Math.abs(cur-last)>.0005){draw();last=cur;dirty=false}
+    document.body.classList.toggle('scrolled',scrollY>innerHeight*.5);
+    stage.style.opacity=Math.max(0,Math.min(1,(scrollY-innerHeight*.3)/(innerHeight*.5)));
+    requestAnimationFrame(tick);
+  }
+  measure();addEventListener('resize',measure);addEventListener('load',measure);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(measure);
+  requestAnimationFrame(tick);
+
+  /* Tierbilder im Kopf wechseln */
+  const ti=[...document.querySelectorAll('#tiere img')];let tn=0;
+  if(!calm)setInterval(()=>{ti[tn].classList.remove('an');tn=(tn+1)%ti.length;ti[tn].classList.add('an')},3800);
+
+  /* Sprechzeiten live. Mittwoch und Donnerstag vormittags: OP-Termine, keine offene Sprechstunde */
+  const Z={1:[[8,11],[15,18]],2:[[8,11],[15,17]],3:[],4:[[17,19]],5:[[9,13]]},OP={3:[9,13],4:[9,13]};
+  const TAG=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+  const n=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Berlin'}));
+  const d=n.getDay(),h=n.getHours()+n.getMinutes()/60,heute=Z[d]||[];
+  const row=document.querySelector('.zeiten [data-day="'+d+'"]');if(row)row.classList.add('heute');
+  let nx=d,i=0;do{nx=(nx+1)%7;i++}while(!(Z[nx]&&Z[nx].length)&&i<8);
+  const offen=heute.find(s=>h>=s[0]&&h<s[1]),kommt=heute.find(s=>h<s[0]);let k;
+  if(offen){k='Jetzt Sprechstunde, bis '+offen[1]+' Uhr';document.getElementById('now').classList.add('auf')}
+  else if(OP[d]&&h>=OP[d][0]&&h<OP[d][1]){k='Gerade OP-Termine'+(kommt?', Sprechstunde ab '+kommt[0]+' Uhr':'')}
+  else if(kommt){k='Heute Sprechstunde ab '+kommt[0]+' Uhr'}
+  else{k='Gerade geschlossen, '+(i===1?'morgen':TAG[nx])+' ab '+Z[nx][0][0]+' Uhr'}
+  document.getElementById('status').textContent=k;
+})();
+</script>
+</body>
+</html>
