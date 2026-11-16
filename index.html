@@ -58,11 +58,6 @@ h1{font-size:clamp(44px,6.4vw,96px);max-width:9.5em}
 h2{font-size:clamp(32px,3.7vw,54px)}
 .inh>:first-child{margin-top:0}
 
-.band1{overflow:hidden;border-bottom:1px solid var(--line);padding:16px 0;background:#fff}
-.lauf{display:flex;width:max-content;animation:lauf 46s linear infinite}
-.lauf span{display:flex;align-items:center;gap:26px;padding-left:26px;font-size:17px;font-weight:500;color:var(--soft);white-space:nowrap}
-.lauf span::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--orange)}
-@keyframes lauf{to{transform:translateX(-50%)}}
 .ch.alt{background:#f6f4f0}
 .ch.dunkel{background:var(--ink);color:#fff;border-top:0;--line:rgba(255,255,255,.2);--soft:rgba(255,255,255,.7)}
 .dunkel+.ch{border-top:0}
@@ -173,7 +168,7 @@ address{font-style:normal;font-size:clamp(26px,2.6vw,38px);line-height:1.2;lette
   .chefin{grid-template-columns:minmax(0,150px) 1fr;gap:18px}
   .inh .btn.line{margin-left:0}
 }
-@media (prefers-reduced-motion:reduce){.lauf{animation:none}.js [data-r]{opacity:1;transform:none;transition:none}.spur i{transition:none}.panel{animation:none}.jetzt::before{animation:none}.tiere img{transition:none}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){.js [data-r]{opacity:1;transform:none;transition:none}.spur i{transition:none}.panel{animation:none}.jetzt::before{animation:none}.tiere img{transition:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -204,8 +199,6 @@ address{font-style:normal;font-size:clamp(26px,2.6vw,38px);line-height:1.2;lette
   </div>
   <span class="bsp">Beispielbilder</span>
 </section>
-
-<div class="band1" aria-hidden="true"><div class="lauf"><span>Hund</span><span>Katze</span><span>Kaninchen</span><span>Nager</span><span>Impfungen</span><span>Röntgen</span><span>Ultraschall</span><span>Zahnbehandlungen</span><span>Weichteilchirurgie</span><span>Homöopathie</span><span>Hund</span><span>Katze</span><span>Kaninchen</span><span>Nager</span><span>Impfungen</span><span>Röntgen</span><span>Ultraschall</span><span>Zahnbehandlungen</span><span>Weichteilchirurgie</span><span>Homöopathie</span></div></div>
 
 <section class="ch" id="zeiten"><div class="box">
   <div class="links"><p class="kick">Sprechzeiten</p>
