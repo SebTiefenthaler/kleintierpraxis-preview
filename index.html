@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kleintierpraxis Dr. Tiefenthaler, Raubling (Entwurf)</title>
 <meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
 <style>
 @font-face{font-family:"Instrument Sans";src:url(fonts/instrument-sans.woff2) format("woff2");font-weight:400 700;font-display:swap}
 :root{--ink:#1b1a18;--soft:#625e58;--line:rgba(27,26,24,.14);--orange:#e5632b;--pad:clamp(20px,6vw,96px);--max:1240px}
@@ -56,8 +58,46 @@ h1{font-size:clamp(44px,6.4vw,96px);max-width:9.5em}
 h2{font-size:clamp(32px,3.7vw,54px)}
 .inh>:first-child{margin-top:0}
 
+.band1{overflow:hidden;border-bottom:1px solid var(--line);padding:16px 0;background:#fff}
+.lauf{display:flex;width:max-content;animation:lauf 46s linear infinite}
+.lauf span{display:flex;align-items:center;gap:26px;padding-left:26px;font-size:17px;font-weight:500;color:var(--soft);white-space:nowrap}
+.lauf span::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--orange)}
+@keyframes lauf{to{transform:translateX(-50%)}}
+.ch.alt{background:#f6f4f0}
+.ch.dunkel{background:var(--ink);color:#fff;border-top:0;--line:rgba(255,255,255,.2);--soft:rgba(255,255,255,.7)}
+.dunkel+.ch{border-top:0}
+.dunkel .not a{color:#fff}
+.jetzt{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;background:#2fae6a;color:#fff;border-radius:999px;padding:3px 10px;margin-left:10px;vertical-align:3px;letter-spacing:0}
+.jetzt::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff;animation:puls 1.8s ease-in-out infinite}
+@keyframes puls{50%{opacity:.35}}
+.satz{padding:clamp(72px,11vw,160px) var(--pad);background:var(--orange);color:#fff}
+.satz p{max-width:var(--max);margin:0 auto;font-size:clamp(32px,5.2vw,78px);font-weight:500;letter-spacing:-.035em;line-height:1.04;text-wrap:balance}
+.satz+.ch{border-top:0}
+.blick{padding:clamp(40px,6vw,88px) 0 clamp(56px,8vw,112px);border-top:1px solid var(--line)}
+.blick .kick{max-width:var(--max);margin:0 auto 22px;padding:0 var(--pad);box-sizing:content-box}
+.reihe{display:flex;gap:clamp(12px,1.6vw,22px);overflow-x:auto;scroll-snap-type:x mandatory;padding:0 max(var(--pad),calc((100vw - var(--max))/2 + var(--pad)));scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.reihe::-webkit-scrollbar{display:none}
+.reihe figure{flex:none;width:clamp(210px,24vw,310px);scroll-snap-align:center;margin:0}
+.reihe img{display:block;width:100%;height:auto;aspect-ratio:480/700;object-fit:cover;border-radius:22px;background:#eee}
+.reihe figcaption{margin-top:10px;font-size:15px;color:var(--soft)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tabs button{font:inherit;font-weight:600;font-size:16px;height:44px;padding:0 18px;border-radius:999px;border:0;background:#fff;color:var(--ink);cursor:pointer;box-shadow:inset 0 0 0 1.5px var(--line);transition:background .2s,color .2s}
+.tabs button[aria-selected=true]{background:var(--ink);color:#fff;box-shadow:none}
+.tabs button:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+.panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,230px);gap:clamp(20px,3vw,44px);align-items:start;margin-top:26px;animation:auf .45s ease}
+.panel[hidden]{display:none}
+.panel .liste{margin-top:0;border-top:1px solid var(--line)}
+.panel img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:20px;background:#e9e6e0}
+@keyframes auf{from{opacity:0;transform:translateY(8px)}}
+.spur{position:relative;height:8px;align-self:center}
+.spur i{position:absolute;top:0;height:8px;border-radius:4px;background:var(--ink);opacity:.2;left:calc((var(--s) - 8) / 11 * 100%);width:calc((var(--e) - var(--s)) / 11 * 100%);transform-origin:left;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.heute .spur i{opacity:1}
+.spur em{position:absolute;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 3px #fff;display:none}
+.js [data-r]{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.js [data-r].in{opacity:1;transform:none}
+.js .zeiten:not(.in) .spur i{transform:scaleX(0)}
 .zeiten{border-top:1px solid var(--line)}
-.zeiten li{display:grid;grid-template-columns:8em 1fr 1fr;gap:8px;padding:14px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;font-size:19px}
+.zeiten li{display:grid;grid-template-columns:7.4em minmax(60px,1fr) 5.6em 5.6em;gap:8px;padding:14px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;font-size:19px}
 .zeiten b{font-weight:500}
 .zeiten .heute b::after{content:"heute";font-size:12px;font-weight:600;background:var(--orange);color:#fff;border-radius:999px;padding:2px 8px;margin-left:8px;vertical-align:2px}
 .fein{color:var(--soft);margin-top:18px;max-width:34em}
@@ -118,14 +158,22 @@ address{font-style:normal;font-size:clamp(26px,2.6vw,38px);line-height:1.2;lette
   h1{font-size:42px}
   .bsp{right:20px;bottom:auto;top:70px}
   .ch{padding:56px 20px}
-  .box{grid-template-columns:1fr;gap:22px}
+  .box{grid-template-columns:minmax(0,1fr);gap:22px}
+  .inh{min-width:0}
   .links{position:static}
   .liste{grid-template-columns:1fr}
   .zeiten li{grid-template-columns:6.4em 1fr 1fr;font-size:17px}
+  .spur{display:none}
+  .panel{grid-template-columns:minmax(0,1fr)}
+  .panel img{display:none}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;margin:0 -20px;padding:2px 20px;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs button{flex:none}
+  .reihe figure{width:62vw}
   .chefin{grid-template-columns:minmax(0,150px) 1fr;gap:18px}
   .inh .btn.line{margin-left:0}
 }
-@media (prefers-reduced-motion:reduce){.tiere img{transition:none}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){.lauf{animation:none}.js [data-r]{opacity:1;transform:none;transition:none}.spur i{transition:none}.panel{animation:none}.jetzt::before{animation:none}.tiere img{transition:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -157,65 +205,64 @@ address{font-style:normal;font-size:clamp(26px,2.6vw,38px);line-height:1.2;lette
   <span class="bsp">Beispielbilder</span>
 </section>
 
+<div class="band1" aria-hidden="true"><div class="lauf"><span>Hund</span><span>Katze</span><span>Kaninchen</span><span>Nager</span><span>Impfungen</span><span>Röntgen</span><span>Ultraschall</span><span>Zahnbehandlungen</span><span>Weichteilchirurgie</span><span>Homöopathie</span><span>Hund</span><span>Katze</span><span>Kaninchen</span><span>Nager</span><span>Impfungen</span><span>Röntgen</span><span>Ultraschall</span><span>Zahnbehandlungen</span><span>Weichteilchirurgie</span><span>Homöopathie</span></div></div>
+
 <section class="ch" id="zeiten"><div class="box">
   <div class="links"><p class="kick">Sprechzeiten</p>
   <h2>Herzlich willkommen.</h2></div>
   <div class="inh">
   <ul class="zeiten">
-    <li data-day="1"><b>Montag</b><span>8–11 Uhr</span><span>15–18 Uhr</span></li>
-    <li data-day="2"><b>Dienstag</b><span>8–11 Uhr</span><span>15–17 Uhr</span></li>
-    <li data-day="3"><b>Mittwoch</b><span>9–13 Uhr</span><span></span></li>
-    <li data-day="4"><b>Donnerstag</b><span>9–13 Uhr</span><span>17–19 Uhr</span></li>
-    <li data-day="5"><b>Freitag</b><span>9–13 Uhr</span><span></span></li>
+    <li data-day="1"><b>Montag</b><span class="spur"><i style="--s:8;--e:11"></i><i style="--s:15;--e:18"></i><em></em></span><span>8–11 Uhr</span><span>15–18 Uhr</span></li>
+    <li data-day="2"><b>Dienstag</b><span class="spur"><i style="--s:8;--e:11"></i><i style="--s:15;--e:17"></i><em></em></span><span>8–11 Uhr</span><span>15–17 Uhr</span></li>
+    <li data-day="3"><b>Mittwoch</b><span class="spur"><i style="--s:9;--e:13"></i><em></em></span><span>9–13 Uhr</span><span></span></li>
+    <li data-day="4"><b>Donnerstag</b><span class="spur"><i style="--s:9;--e:13"></i><i style="--s:17;--e:19"></i><em></em></span><span>9–13 Uhr</span><span>17–19 Uhr</span></li>
+    <li data-day="5"><b>Freitag</b><span class="spur"><i style="--s:9;--e:13"></i><em></em></span><span>9–13 Uhr</span><span></span></li>
   </ul>
   <p class="fein">Bitte rufen Sie immer vorher an: für Termine, für Beratungen und kurz bevor Sie Futter oder Medikamente abholen.</p>
   <p class="fein">Wir nehmen neue Patienten auf. Bringen Sie zum ersten Termin den Impfpass und vorhandene Befunde mit. Katzen bitte im Korb, Hunde an der Leine.</p>
 </div>
 </div></section>
 
-<section class="ch" id="leistungen"><div class="box">
+<section class="blick" aria-label="Ein Blick in die Praxis">
+  <p class="kick">Ein Blick in die Praxis</p>
+  <div class="reihe" tabindex="0">
+    <figure><img src="bilder/praxis-1.jpg" alt="Wartezimmer mit Pflanzen am Fenster und orangefarbenen Stühlen" width="480" height="856" loading="lazy"><figcaption>Wartezimmer</figcaption></figure>
+    <figure><img src="bilder/praxis-2.jpg" alt="Gemälde eines Hundes über einem roten Stuhl im Wartezimmer" width="480" height="856" loading="lazy"><figcaption>Wartezimmer</figcaption></figure>
+    <figure><img src="bilder/praxis-3.jpg" alt="Heller Behandlungsraum mit Behandlungstisch und großem Fenster" width="480" height="856" loading="lazy"><figcaption>Behandlungsraum</figcaption></figure>
+    <figure><img src="bilder/praxis-4.jpg" alt="Narkosegerät und Zahnbehandlungseinheit" width="480" height="856" loading="lazy"><figcaption>Narkose und Zahnbehandlung</figcaption></figure>
+    <figure><img src="bilder/praxis-5.jpg" alt="Fenster mit dem Logo der Praxis" width="480" height="856" loading="lazy"><figcaption>Fenster zur Straße</figcaption></figure>
+  </div>
+</section>
+
+<section class="ch alt" id="leistungen"><div class="box">
   <div class="links"><p class="kick">Leistungen</p>
-  <h2>Vorsorge und Behandlung</h2></div>
+  <h2>Was wir für Ihr Tier tun</h2></div>
   <div class="inh">
-  <ul class="liste">
-    <li>Impfungen</li><li>Parasitenbehandlung</li>
-    <li>Kennzeichnung (Mikrochip, Tätowierung)</li><li>Heimtierausweis</li>
-    <li>Fütterungsberatung</li><li>Infektionskrankheiten</li>
-    <li>Krankheiten des Ohres</li><li>Krankheiten des Auges</li>
-    <li>innere Krankheiten</li><li>Krankheiten der Harnorgane</li>
-  </ul>
-</div>
-</div></section>
-
-<section class="ch"><div class="box">
-  <div class="links"><p class="kick">Diagnostik</p>
-  <h2>Röntgen, Ultraschall, Homöopathie</h2></div>
-  <div class="inh">
-  <ul class="liste eins">
-    <li>Röntgen</li>
-    <li>Ultraschall</li>
-    <li>Zahnröntgen</li>
-    <li>Homöopathie, auf Wunsch ergänzend</li>
-  </ul>
+  <div class="tabs" role="tablist" aria-label="Leistungen">
+    <button role="tab" aria-selected="true" aria-controls="t1" id="r1">Vorsorge</button><button role="tab" aria-selected="false" aria-controls="t2" id="r2" tabindex="-1">Behandlung</button><button role="tab" aria-selected="false" aria-controls="t3" id="r3" tabindex="-1">Röntgen, Ultraschall</button><button role="tab" aria-selected="false" aria-controls="t4" id="r4" tabindex="-1">Operationen</button><button role="tab" aria-selected="false" aria-controls="t5" id="r5" tabindex="-1">Zähne</button>
+  </div>
+  <div class="panel" role="tabpanel" id="t1" aria-labelledby="r1">
+    <ul class="liste eins"><li>Impfungen</li><li>Parasitenbehandlung</li><li>Kennzeichnung (Mikrochip, Tätowierung)</li><li>Heimtierausweis</li><li>Fütterungsberatung</li></ul>
+    <img src="bilder/katze-dunkel.jpg" alt="" style="object-position:72% 35%" loading="lazy">
+  </div>
+  <div class="panel" role="tabpanel" id="t2" aria-labelledby="r2" hidden>
+    <ul class="liste eins"><li>Infektionskrankheiten</li><li>Krankheiten des Ohres</li><li>Krankheiten des Auges</li><li>innere Krankheiten</li><li>Krankheiten der Harnorgane</li><li>Homöopathie, auf Wunsch ergänzend</li></ul>
+    <img src="bilder/praxis-3.jpg" alt="" loading="lazy">
+  </div>
+  <div class="panel" role="tabpanel" id="t3" aria-labelledby="r3" hidden>
+    <ul class="liste eins"><li>Röntgen</li><li>Ultraschall</li><li>Zahnröntgen</li></ul>
+    <img src="bilder/hund-liegt.jpg" alt="" style="object-position:50% 38%" loading="lazy">
+  </div>
+  <div class="panel" role="tabpanel" id="t4" aria-labelledby="r4" hidden>
+    <ul class="liste eins"><li>Kastration/Sterilisation (Hund, Katze, Kaninchen)</li><li>Wundversorgung/Wundnaht</li><li>Tumorentfernung</li><li>Amputation</li><li>Bulbusextirpation</li><li class="hin"><a href="#op">Hinweise für vor und nach der Operation</a></li></ul>
+    <img src="bilder/praxis-4.jpg" alt="" loading="lazy">
+  </div>
+  <div class="panel" role="tabpanel" id="t5" aria-labelledby="r5" hidden>
+    <ul class="liste eins"><li>Zahnsteinentfernung mit Ultraschall</li><li>Zahnextraktion</li><li>Zahnbehandlung Nager</li></ul>
+    <img src="bilder/hund-labrador.jpg" alt="" style="object-position:70% 40%" loading="lazy">
+  </div>
   <p class="fein">Futter führen wir von Royal Canin und Hill's. Rufen Sie kurz vorher an, ob es auf Lager ist. Wir bestellen es auch gern für Sie.</p>
-</div>
-</div></section>
-
-<section class="ch"><div class="box">
-  <div class="links"><p class="kick">Operationen</p>
-  <h2>Operationen und Zähne</h2></div>
-  <div class="inh">
-  <h3>Weichteilchirurgie</h3>
-  <ul class="liste">
-    <li>Kastration/Sterilisation (Hund, Katze, Kaninchen)</li><li>Wundversorgung/Wundnaht</li>
-    <li>Tumorentfernung</li><li>Amputation</li><li>Bulbusextirpation</li>
-  </ul>
-  <h3>Zahnbehandlungen</h3>
-  <ul class="liste">
-    <li>Zahnsteinentfernung mit Ultraschall</li><li>Zahnextraktion</li><li>Zahnbehandlung Nager</li>
-  </ul>
-  <p class="fein hin"><a href="#op">Steht eine Operation an? Hier stehen die Hinweise für davor und danach.</a></p>
-</div>
+  </div>
 </div></section>
 
 <section class="ch" id="op"><div class="box">
@@ -236,7 +283,7 @@ address{font-style:normal;font-size:clamp(26px,2.6vw,38px);line-height:1.2;lette
   </div>
 </div></section>
 
-<section class="ch" id="impfung"><div class="box">
+<section class="ch alt" id="impfung"><div class="box">
   <div class="links"><p class="kick">Impf-Erinnerung</p>
   <h2>Die nächste Impfung nicht vergessen</h2></div>
   <div class="inh">
@@ -252,6 +299,8 @@ address{font-style:normal;font-size:clamp(26px,2.6vw,38px);line-height:1.2;lette
   </div>
 </div></section>
 
+<div class="satz"><p>Ermöglichen Sie Ihrem Tier und sich selbst einen stressfreien Tierarztbesuch.</p></div>
+
 <section class="ch" id="team"><div class="box">
   <div class="links"><p class="kick">Team</p>
   <h2>Ihre Hausärztin fürs Tier</h2></div>
@@ -266,15 +315,15 @@ address{font-style:normal;font-size:clamp(26px,2.6vw,38px);line-height:1.2;lette
 </div>
 </div></section>
 
-<section class="ch" id="notfall"><div class="box">
+<section class="ch dunkel" id="notfall"><div class="box">
   <div class="links"><p class="kick">Notfall</p>
   <h2>Außerhalb der Sprechzeiten</h2></div>
   <div class="inh">
   <p class="fein">Bitte wenden Sie sich im Notfall an eine dieser Kliniken.</p>
   <ul class="not">
-    <li><b>Tierklinik Dr. Butenandt</b><span>Notdienst 8 bis 24 Uhr</span><a href="tel:+49803168027">08031 68027</a></li>
-    <li><b>Vet-Zentrum Rosenheim</b><span>Montag bis Freitag 8 bis 22 Uhr, am Wochenende 9 bis 12 und 17 bis 18 Uhr</span><a href="tel:+491728305589">Notdienst 0172 8305589</a><a href="tel:+4980363033473">Praxis 08036 3033473</a></li>
-    <li><b>Tierklinik Oberhaching</b><span>Notdienst rund um die Uhr</span><a href="tel:+498963893020">089 63893020</a></li>
+    <li data-klinik="butenandt"><b>Tierklinik Dr. Butenandt</b><span>Notdienst 8 bis 24 Uhr</span><a href="tel:+49803168027">08031 68027</a></li>
+    <li data-klinik="vetzentrum"><b>Vet-Zentrum Rosenheim</b><span>Montag bis Freitag 8 bis 22 Uhr, am Wochenende 9 bis 12 und 17 bis 18 Uhr</span><a href="tel:+491728305589">Notdienst 0172 8305589</a><a href="tel:+4980363033473">Praxis 08036 3033473</a></li>
+    <li data-klinik="oberhaching"><b>Tierklinik Oberhaching</b><span>Notdienst rund um die Uhr</span><a href="tel:+498963893020">089 63893020</a></li>
   </ul>
 </div>
 </div></section>
@@ -286,18 +335,19 @@ address{font-style:normal;font-size:clamp(26px,2.6vw,38px);line-height:1.2;lette
   <address>Prinzregentenstraße 1<br>83064 Raubling</address>
   <p class="fein">Die Zufahrt ist zurzeit nur über die Bayernstraße möglich. Parkplätze sind hinter dem Haus.</p>
   <p class="fein">Bezahlen können Sie bar oder mit Karte.</p>
-  <a class="karte" href="https://www.google.com/maps/dir/?api=1&destination=Prinzregentenstra%C3%9Fe+1%2C+83064+Raubling" aria-label="Route zur Praxis in Google Maps öffnen">
+  <a class="karte" href="https://www.google.com/maps/dir/?api=1&destination=Prinzregentenstra%C3%9Fe+1%2C+83064+Raubling" aria-label="Route zur Praxis in Google Maps öffnen" rel="noopener noreferrer">
     <img src="bilder/karte.jpg" alt="Kartenausschnitt von Raubling: Die Praxis liegt an der Ecke Bayernstraße und Prinzregentenstraße, westlich der Bahn" width="1280" height="800" loading="lazy">
     <span class="pin"><i></i><b>Kleintierpraxis Dr. Tiefenthaler</b></span>
     <span class="quelle">© OpenStreetMap-Mitwirkende</span>
   </a>
-  <p class="wege"><a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Prinzregentenstra%C3%9Fe+1%2C+83064+Raubling">Route in Google Maps</a><a class="btn line" href="https://maps.apple.com/?daddr=Prinzregentenstra%C3%9Fe+1,+83064+Raubling">Apple Karten</a><a class="btn line" href="tel:+4980358739188">08035 8739188</a></p>
+  <p class="wege"><a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Prinzregentenstra%C3%9Fe+1%2C+83064+Raubling" rel="noopener noreferrer">Route in Google Maps</a><a class="btn line" href="https://maps.apple.com/?daddr=Prinzregentenstra%C3%9Fe+1,+83064+Raubling" rel="noopener noreferrer">Apple Karten</a><a class="btn line" href="tel:+4980358739188">08035 8739188</a></p>
   <p class="fuss"><span>Fax 08035 8739189</span><a href="mailto:tierarztpraxis-tiefenthaler@gmx.de">tierarztpraxis-tiefenthaler@gmx.de</a><a href="#">Impressum</a><a href="#">Datenschutz</a></p>
 </div>
 </div></section>
 </main>
 
 <script>
+document.documentElement.classList.add('js');
 (function(){
   const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
   const on=()=>document.body.classList.toggle('scrolled',scrollY>innerHeight*.72);on();addEventListener('scroll',on,{passive:true});
@@ -316,6 +366,29 @@ address{font-style:normal;font-size:clamp(26px,2.6vw,38px);line-height:1.2;lette
   else if(kommt){k='Heute wieder ab '+kommt[0]+' Uhr'}
   else{k='Gerade geschlossen, '+(i===1?'morgen':TAG[nx])+' ab '+Z[nx][0][0]+' Uhr'}
   document.getElementById('status').textContent=k;
+
+  /* Punkt für die Uhrzeit in der heutigen Zeile */
+  if(row&&h>=8&&h<=19){const e=row.querySelector('.spur em');e.style.display='block';e.style.left=((h-8)/11*100)+'%'}
+
+  /* Abschnitte beim Scrollen einblenden */
+  const rv=[...document.querySelectorAll('.links,.inh>*,.reihe figure,.satz p,.blick .kick')];
+  rv.forEach(e=>e.setAttribute('data-r',''));
+  document.querySelectorAll('.inh').forEach(c=>[...c.children].forEach((e,i)=>e.style.transitionDelay=Math.min(i,5)*70+'ms'));
+  document.querySelectorAll('.reihe figure').forEach((e,i)=>e.style.transitionDelay=i*80+'ms');
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    rv.forEach(e=>io.observe(e));
+  }else rv.forEach(e=>e.classList.add('in'));
+
+  /* Reiter bei den Leistungen */
+  const tabs=[...document.querySelectorAll('.tabs [role=tab]')];
+  const zeige=t=>{tabs.forEach(x=>{const an=x===t;x.setAttribute('aria-selected',an);x.tabIndex=an?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!an})};
+  tabs.forEach((t,i)=>{t.addEventListener('click',()=>zeige(t));t.addEventListener('keydown',e=>{const d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;e.preventDefault();const n=tabs[(i+d+tabs.length)%tabs.length];zeige(n);n.focus()})});
+
+  /* Notfall: welche Klinik hat jetzt Notdienst */
+  const we=d===0||d===6;
+  const dienst={butenandt:h>=8&&h<24,vetzentrum:we?((h>=9&&h<12)||(h>=17&&h<18)):(h>=8&&h<22),oberhaching:true};
+  document.querySelectorAll('[data-klinik]').forEach(li=>{if(dienst[li.dataset.klinik]){const m=document.createElement('span');m.className='jetzt';m.textContent='jetzt Notdienst';li.querySelector('b').appendChild(m)}});
 
   /* OP-Hinweise: Tierart und Uhrzeit */
   const ot=document.getElementById('optier'),oz=document.getElementById('opzeit'),ol=document.getElementById('opliste'),ozf=document.getElementById('opzeitfeld');
